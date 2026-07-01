@@ -9,7 +9,7 @@ application. This project shows the full path from **exploratory testing** to a 
 ## What this project demonstrates
 
 - **Exploratory testing** of the main purchase flow (login, inventory, cart, checkout), using a reference account to establish correct behavior.
-- **Professional bug reports** — documented defects with reproduction steps, expected vs. actual results, and severity ratings (see [`docs/bug-reports.md`](bug-reports.md)).
+- **Professional bug reports** — documented defects with reproduction steps, expected vs. actual results, and severity ratings (see [`bug-reports.md`](bug-reports.md)).
 - **Bug triage discipline** — suspected issues were validated against a known-good reference account before being reported, and false positives were ruled out instead of filed.
 - **Automated regression testing** — a Playwright test that encodes correct behavior; it passes against the working account and catches a real defect when run against the broken one.
 
