@@ -20,6 +20,35 @@ to work correctly, and `problem_user` as the account **under test**. Comparing t
 made it possible to tell genuine defects apart from expected behavior — and to discard
 false alarms instead of filing incorrect reports.
 
+## How it works
+
+```mermaid
+flowchart TD
+    site["SauceDemo (live site)"]
+
+    subgraph manual["Manual exploratory testing"]
+        acc1["standard_user — baseline"]
+        acc2["problem_user — under test"]
+        acc1 --> compare["compare behavior"]
+        acc2 --> compare
+        compare --> triage["confirm real defects, rule out false positives"]
+        triage --> reports["bug reports (docs/bug-reports.md)"]
+    end
+
+    site --> acc1
+    site --> acc2
+    reports --> pick["one defect: broken sort"]
+
+    subgraph auto["Automated regression"]
+        pick --> test["tests/test_sorting.py — asserts correct sort order"]
+        test --> passes["passes for standard_user"]
+        test --> fails["fails for problem_user — catches the defect"]
+    end
+
+    push["git push"] --> ci["GitHub Actions (CI)"]
+    ci --> test
+```
+
 ## From bug report to regression test
 
 The automated test was built directly from one of the defects found during exploratory
